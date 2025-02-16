@@ -1,0 +1,1 @@
+/home/reza/Desktop/mazaneh/build/app/intermediates/cxx/RelWithDebInfo/672g6z5b/obj/arm64-v8a

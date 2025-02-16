@@ -1,0 +1,2 @@
+/home/reza/Desktop/mazaneh/android/app/.cxx/RelWithDebInfo/672g6z5b/x86_64/CMakeFiles/edit_cache.dir
+/home/reza/Desktop/mazaneh/android/app/.cxx/RelWithDebInfo/672g6z5b/x86_64/CMakeFiles/rebuild_cache.dir

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Calculation extends StatefulWidget {
-  Calculation({super.key});
+  const Calculation({super.key});
 
   @override
   State<Calculation> createState() => _CalculationState();
@@ -328,7 +328,7 @@ class _CalculationState extends State<Calculation> {
                         text2 = double.parse(text2.toStringAsFixed(2));
 
                         text3 = double.parse(_controller2.text) / text1;
-                        text3 = double.parse(text3.toStringAsFixed(2));
+                        text3 = double.parse(text3.toStringAsFixed(3));
                         setState(() {});
                       }
                     },
