@@ -169,8 +169,9 @@ class _MoltenState extends State<Molten> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     double text1 = double.parse(_controller1.text) / 4.331802;
-                    text1 = double.parse(text1.toStringAsFixed(2));
-                    text3 = double.parse(_controller2.text) / text1;
+                    text3 = double.parse(_controller2.text) *
+                        (1 - (double.parse(_controller6.text) / 100)) /
+                        text1;
                     text3 = double.parse(text3.toStringAsFixed(3));
                     setState(() {});
                   }
