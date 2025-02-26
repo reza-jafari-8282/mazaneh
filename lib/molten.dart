@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mazaneh/spliter.dart';
 
 class Molten extends StatefulWidget {
   const Molten({super.key});
@@ -22,7 +23,7 @@ class _MoltenState extends State<Molten> {
     if (value == null || value.isEmpty) {
       return 'این فیلد نباید خالی باشد';
     }
-    if (!RegExp(r'^[0-9]*\.?[0-9]+$').hasMatch(value)) {
+    if (!RegExp(r'^\d{1,3}(,\d{3})*(\.\d+)?$').hasMatch(value)) {
       return 'لطفا عدد وارد کنید';
     }
     return null;
@@ -60,6 +61,9 @@ class _MoltenState extends State<Molten> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller1,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -97,6 +101,9 @@ class _MoltenState extends State<Molten> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller2,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -134,6 +141,9 @@ class _MoltenState extends State<Molten> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller6,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -168,10 +178,16 @@ class _MoltenState extends State<Molten> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    double text1 = double.parse(_controller1.text) / 4.331802;
-                    text3 = double.parse(_controller2.text) *
-                        (1 - (double.parse(_controller6.text) / 100)) /
-                        text1;
+                    double text1 =
+                        double.parse(_controller1.text.replaceAll(",", "")) /
+                            4.331802;
+                    text3 =
+                        double.parse(_controller2.text.replaceAll(",", "")) *
+                            (1 -
+                                (double.parse(
+                                        _controller6.text.replaceAll(",", "")) /
+                                    100)) /
+                            text1;
                     text3 = double.parse(text3.toStringAsFixed(3));
                     setState(() {});
                   }

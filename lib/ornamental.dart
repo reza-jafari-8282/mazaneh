@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mazaneh/spliter.dart';
 
 class Ornamental extends StatefulWidget {
   const Ornamental({super.key});
@@ -26,7 +27,7 @@ class _OrnamentalState extends State<Ornamental> {
     if (value == null || value.isEmpty) {
       return 'این فیلد نباید خالی باشد';
     }
-    if (!RegExp(r'^[0-9]*\.?[0-9]+$').hasMatch(value)) {
+    if (!RegExp(r'^\d{1,3}(,\d{3})*(\.\d+)?$').hasMatch(value)) {
       return 'لطفا عدد وارد کنید';
     }
     return null;
@@ -64,6 +65,9 @@ class _OrnamentalState extends State<Ornamental> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller1,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -101,6 +105,9 @@ class _OrnamentalState extends State<Ornamental> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller3,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -138,6 +145,9 @@ class _OrnamentalState extends State<Ornamental> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller4,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -175,6 +185,9 @@ class _OrnamentalState extends State<Ornamental> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller5,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -212,6 +225,9 @@ class _OrnamentalState extends State<Ornamental> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: TextFormField(
+                          inputFormatters: [
+                            ThousandsSeparatorInputFormatter(),
+                          ],
                           controller: _controller6,
                           textDirection: TextDirection
                               .ltr, // Set the text direction to RTL
@@ -236,7 +252,7 @@ class _OrnamentalState extends State<Ornamental> {
               Row(
                 children: [
                   Text(
-                    "قیمت: ${text2 != -1 ? text2 : ''}",
+                    "قیمت: ${text2 != -1 ? formatNumber(text2.toInt().toString()) : ''}",
                     style: TextStyle(color: Color(0xFFEAF8F8), fontSize: 19),
                   ),
                 ],
@@ -247,12 +263,22 @@ class _OrnamentalState extends State<Ornamental> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
-                      text2 = (double.parse(_controller1.text) *
-                              double.parse(_controller3.text)) *
-                          ((double.parse(_controller4.text) / 100) + 1) *
-                          ((double.parse(_controller5.text) / 100) + 1) *
-                          ((double.parse(_controller6.text) / 100) + 1);
-                      text2 = double.parse(text2.toStringAsFixed(2));
+                      text2 = (double.parse(
+                                  _controller1.text.replaceAll(",", "")) *
+                              double.parse(
+                                  _controller3.text.replaceAll(",", ""))) *
+                          ((double.parse(
+                                      _controller4.text.replaceAll(",", "")) /
+                                  100) +
+                              1) *
+                          ((double.parse(
+                                      _controller5.text.replaceAll(",", "")) /
+                                  100) +
+                              1) *
+                          ((double.parse(
+                                      _controller6.text.replaceAll(",", "")) /
+                                  100) +
+                              1);
                     });
                   }
                 },
