@@ -178,15 +178,14 @@ class _MoltenState extends State<Molten> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    double text1 =
-                        double.parse(_controller1.text.replaceAll(",", "")) /
-                            4.331802;
+                    double text1 = (double.parse(
+                                _controller1.text.replaceAll(",", "")) /
+                            4.331802) *
+                        (double.parse(_controller6.text.replaceAll(",", "")) /
+                                100 +
+                            1);
                     text3 =
-                        double.parse(_controller2.text.replaceAll(",", "")) *
-                            (1 -
-                                (double.parse(
-                                        _controller6.text.replaceAll(",", "")) /
-                                    100)) /
+                        double.parse(_controller2.text.replaceAll(",", "")) /
                             text1;
                     text3 = double.parse(text3.toStringAsFixed(3));
                     setState(() {});
